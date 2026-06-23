@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>货币兑换 - 万里汇 WorldFirst</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="wf-app">
+  <!-- Sidebar -->
+  <aside class="wf-sidebar">
+    <div class="wf-logo">
+      <div>
+        <div class="wf-logo-cn">万里汇</div>
+      </div>
+      <div class="wf-logo-en">World<br>First</div>
+    </div>
+    <nav class="wf-nav">
+      <div class="wf-nav-item" onclick="location.href='index.html'">
+        <span class="wf-nav-icon">⌂</span>
+        <span>首页</span>
+      </div>
+      <div class="wf-nav-item active">
+        <span class="wf-nav-icon">⇅</span>
+        <span>资金管理</span>
+        <span class="wf-nav-tag">广告充值0手续费</span>
+      </div>
+      <div class="wf-nav-item">
+        <span class="wf-nav-icon">⊙</span>
+        <span>收款人管理</span>
+      </div>
+      <div class="wf-nav-item">
+        <span class="wf-nav-icon">⊞</span>
+        <span>店铺管理</span>
+      </div>
+      <div class="wf-nav-item">
+        <span class="wf-nav-icon">≡</span>
+        <span>账单管理中心</span>
+      </div>
+      <div class="wf-nav-item">
+        <span class="wf-nav-icon">▭</span>
+        <span>万里付信用卡</span>
+      </div>
+      <div class="wf-nav-item">
+        <span class="wf-nav-icon">⊙</span>
+        <span>安心兑</span>
+      </div>
+      <div class="wf-nav-item">
+        <span class="wf-nav-icon">↯</span>
+        <span>极速融</span>
+        <span class="wf-nav-tag">信用付</span>
+      </div>
+      <div class="wf-nav-item">
+        <span class="wf-nav-icon">⛵</span>
+        <span>全球远航</span>
+        <span class="wf-nav-tag">全新升级</span>
+      </div>
+      <div class="wf-nav-item">
+        <span class="wf-nav-icon">{ }</span>
+        <span>开发者中心</span>
+      </div>
+      <div class="wf-nav-item">
+        <span class="wf-nav-icon">♢</span>
+        <span>福利中心</span>
+      </div>
+    </nav>
+  </aside>
+
+  <!-- Main -->
+  <main class="wf-main">
+    <header class="wf-header">
+      <div class="wf-header-left">
+        <div class="wf-account-switch">
+          <span>外贸B2B账号与海外账号快捷开...</span>
+          <span style="color:var(--wf-text-muted);font-size:10px;">▼</span>
+        </div>
+      </div>
+      <div class="wf-header-right">
+        <div class="wf-app-download">下载万里汇App</div>
+        <div class="wf-icon-btn">🔔</div>
+        <div class="wf-icon-btn">👤</div>
+      </div>
+    </header>
+
+    <div class="wf-content" style="display:block;">
+      <!-- breadcrumb -->
+      <div class="wf-breadcrumb">
+        <a href="index.html">首页</a> ／ <a href="#">资金管理</a> ／ <span class="wf-breadcrumb-current">货币兑换</span>
+      </div>
+      <h1 class="wf-page-title">货币兑换</h1>
+
+      <!-- Exchange card -->
+      <div class="wf-exchange-card">
+        <div class="wf-exchange-row">
+          <div class="wf-exchange-label">兑出币种</div>
+          <div class="wf-currency-pick" id="from-currency">
+            <span class="wf-flag wf-flag-usd">$</span>
+            <div>
+              <div class="wf-currency-name">USD</div>
+              <div class="wf-currency-desc">美元</div>
+            </div>
+            <span style="color:var(--wf-text-muted);margin-left:auto;">▾</span>
+          </div>
+          <input class="wf-amount-input" id="amount-input" type="text" placeholder="请输入金额" autocomplete="off">
+          <div class="wf-balance-info">
+            余额 <strong>$58,234.21</strong>
+          </div>
+        </div>
+
+        <div class="wf-exchange-divider">
+          <div class="wf-exchange-swap">⇅</div>
+        </div>
+
+        <div class="wf-exchange-row">
+          <div class="wf-exchange-label">兑入币种</div>
+          <div class="wf-currency-pick" id="to-currency">
+            <span class="wf-flag wf-flag-cnh">¥</span>
+            <div>
+              <div class="wf-currency-name">CNH</div>
+              <div class="wf-currency-desc">离岸人民币</div>
+            </div>
+            <span style="color:var(--wf-text-muted);margin-left:auto;">▾</span>
+          </div>
+          <input class="wf-amount-input readonly" id="amount-output" type="text" readonly placeholder="≈ 0.00">
+          <div class="wf-rate-info">
+            参考汇率 <strong id="ref-rate">7.0190</strong>
+          </div>
+        </div>
+
+        <!-- AI suggestion mount point -->
+        <div id="ai-card-mount"></div>
+
+        <!-- Saved/applied banner -->
+        <div class="wf-saved-banner" id="saved-banner">
+          <strong>✓ 已应用建议方案</strong> · 减少一次未来二次换汇链路，按当前费率估算可<strong> 减少路径成本约 ¥XXX</strong>
+        </div>
+
+        <div class="wf-exchange-actions">
+          <button class="wf-btn wf-btn-ghost" onclick="location.href='index.html'">取消</button>
+          <button class="wf-btn wf-btn-primary" id="confirm-btn" disabled>确认兑换</button>
+        </div>
+      </div>
+
+      <!-- Account summary -->
+      <div class="wf-card">
+        <div class="wf-card-title">账户摘要</div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;">
+          <div style="padding:12px 16px;background:var(--wf-bg-soft);border-radius:10px;">
+            <div style="font-size:12px;color:var(--wf-text-secondary);">USD 余额</div>
+            <div style="font-size:18px;font-weight:600;margin-top:4px;">$58,234.21</div>
+          </div>
+          <div style="padding:12px 16px;background:var(--wf-bg-soft);border-radius:10px;">
+            <div style="font-size:12px;color:var(--wf-text-secondary);">EUR 余额</div>
+            <div style="font-size:18px;font-weight:600;margin-top:4px;">€12,418.50</div>
+          </div>
+          <div style="padding:12px 16px;background:var(--wf-bg-soft);border-radius:10px;">
+            <div style="font-size:12px;color:var(--wf-text-secondary);">HKD 余额</div>
+            <div style="font-size:18px;font-weight:600;margin-top:4px;">HK$32,610.00</div>
+          </div>
+          <div style="padding:12px 16px;background:var(--wf-bg-soft);border-radius:10px;">
+            <div style="font-size:12px;color:var(--wf-text-secondary);">本月可结汇额度</div>
+            <div style="font-size:18px;font-weight:600;margin-top:4px;color:var(--wf-text-main);">¥ 410,000</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Floating actions -->
+  <div class="wf-floating-actions">
+    <button title="提示">💡</button>
+    <button title="扫码下载">📱</button>
+    <button title="客服">？</button>
+  </div>
+</div>
+
+<!-- Demo helper (面试现场可以用来切场景) -->
+<div class="wf-demo-helper">
+  <span>演示场景</span>
+  <button data-scenario="保留外币付款" class="active" onclick="setScenario('保留外币付款')">保留外币</button>
+  <button data-scenario="付供应商" onclick="setScenario('付供应商')">付供应商</button>
+  <button data-scenario="暂时不用" onclick="setScenario('暂时不用')">暂时不用</button>
+  <button data-scenario="不确定" onclick="setScenario('不确定')">额度不足</button>
+</div>
+
+<!-- Chat drawer -->
+<div class="wf-chat-mask" id="chat-mask" onclick="closeChat()"></div>
+<aside class="wf-chat" id="chat-drawer">
+  <div class="wf-chat-head">
+    <div class="wf-chat-title-wrap">
+      <div class="wf-chat-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-9-9c1.6 0 3.1.4 4.4 1.1"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      </div>
+      <div class="wf-chat-title">追问 AI</div>
+    </div>
+    <div class="wf-ai-close" onclick="closeChat()">×</div>
+  </div>
+  <div class="wf-chat-context" id="chat-context"></div>
+  <div class="wf-chat-body" id="chat-body"></div>
+  <div class="wf-chat-suggestions" id="chat-suggestions"></div>
+  <div class="wf-chat-input-wrap">
+    <textarea class="wf-chat-input" id="chat-input" rows="1" placeholder="对建议有疑问？随便问..." onkeydown="onChatKeyDown(event)"></textarea>
+    <button class="wf-chat-send" id="chat-send" onclick="sendChat()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+    </button>
+  </div>
+</aside>
+
+<!-- Toast -->
+<div class="wf-toast" id="toast"></div>
+
+<script src="app.js"></script>
+</body>
+</html>

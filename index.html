@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>万里汇 WorldFirst</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="wf-app">
+  <!-- Sidebar -->
+  <aside class="wf-sidebar">
+    <div class="wf-logo">
+      <div>
+        <div class="wf-logo-cn">万里汇</div>
+      </div>
+      <div class="wf-logo-en">World<br>First</div>
+    </div>
+    <nav class="wf-nav">
+      <div class="wf-nav-item active">
+        <span class="wf-nav-icon">⌂</span>
+        <span>首页</span>
+      </div>
+      <div class="wf-nav-item" onclick="goExchange()">
+        <span class="wf-nav-icon">⇅</span>
+        <span>资金管理</span>
+        <span class="wf-nav-tag">广告充值0手续费</span>
+      </div>
+      <div class="wf-nav-item">
+        <span class="wf-nav-icon">⊙</span>
+        <span>收款人管理</span>
+      </div>
+      <div class="wf-nav-item">
+        <span class="wf-nav-icon">⊞</span>
+        <span>店铺管理</span>
+      </div>
+      <div class="wf-nav-item">
+        <span class="wf-nav-icon">≡</span>
+        <span>账单管理中心</span>
+      </div>
+      <div class="wf-nav-item">
+        <span class="wf-nav-icon">▭</span>
+        <span>万里付信用卡</span>
+      </div>
+      <div class="wf-nav-item">
+        <span class="wf-nav-icon">⊙</span>
+        <span>安心兑</span>
+      </div>
+      <div class="wf-nav-item">
+        <span class="wf-nav-icon">↯</span>
+        <span>极速融</span>
+        <span class="wf-nav-tag">信用付</span>
+      </div>
+      <div class="wf-nav-item">
+        <span class="wf-nav-icon">⛵</span>
+        <span>全球远航</span>
+        <span class="wf-nav-tag">全新升级</span>
+      </div>
+      <div class="wf-nav-item">
+        <span class="wf-nav-icon">{ }</span>
+        <span>开发者中心</span>
+      </div>
+      <div class="wf-nav-item">
+        <span class="wf-nav-icon">♢</span>
+        <span>福利中心</span>
+      </div>
+    </nav>
+  </aside>
+
+  <!-- Main -->
+  <main class="wf-main">
+    <header class="wf-header">
+      <div class="wf-header-left">
+        <div class="wf-account-switch">
+          <span>外贸B2B账号与海外账号快捷开...</span>
+          <span style="color:var(--wf-text-muted);font-size:10px;">▼</span>
+        </div>
+      </div>
+      <div class="wf-header-right">
+        <div class="wf-app-download">下载万里汇App</div>
+        <div class="wf-icon-btn">🔔</div>
+        <div class="wf-icon-btn">👤</div>
+      </div>
+    </header>
+
+    <div style="padding:0 32px 0;">
+      <!-- Promo banner -->
+      <div class="wf-promo-banner">
+        <div class="wf-promo-banner-text">
+          跨境电商"0"费率　最高享 <strong>￥100万</strong>免费额度
+        </div>
+        <div class="wf-promo-banner-btn">立即查看</div>
+      </div>
+    </div>
+
+    <div class="wf-content">
+      <div class="wf-content-main">
+        <!-- 待办事项 -->
+        <div class="wf-card">
+          <div class="wf-card-title">
+            待办事项
+            <span class="wf-card-action">展开全部任务 ▾</span>
+          </div>
+          <div class="wf-todo">
+            <div class="wf-todo-icon">🪪</div>
+            <div class="wf-todo-content">
+              <div class="wf-todo-title">账号认证</div>
+              <div class="wf-todo-desc">完成实名认证，为您的业务解锁无限可能</div>
+            </div>
+            <div class="wf-todo-action">去认证 ›</div>
+          </div>
+        </div>
+
+        <!-- 快捷导航 -->
+        <div class="wf-card">
+          <div class="wf-card-title">快捷导航</div>
+          <div class="wf-quick-nav">
+            <div class="wf-quick-btn primary"><span>↗</span>提款</div>
+            <div class="wf-quick-btn"><span>⇄</span>转账</div>
+            <div class="wf-quick-btn"><span>＋</span>申请收款账号</div>
+            <div class="wf-quick-btn"><span>📦</span>跨境宝</div>
+            <div class="wf-quick-btn" onclick="goExchange()" style="position:relative;">
+              <span>⇅</span>货币兑换
+              <span style="position:absolute;top:-6px;right:-4px;background:var(--wf-primary);color:#fff;font-size:10px;padding:1px 5px;border-radius:6px;font-weight:600;">AI</span>
+            </div>
+            <div class="wf-quick-btn"><span>···</span>更多功能</div>
+          </div>
+        </div>
+
+        <!-- 我的资产 -->
+        <div class="wf-card">
+          <div class="wf-card-title">
+            <span>我的资产 <span class="wf-card-subtitle">下载App，随时随地便捷收付</span></span>
+          </div>
+          <div class="wf-asset-empty">
+            <div class="wf-asset-empty-icon">🤚</div>
+            <div class="wf-asset-empty-title">支持全球 10 大主流货币</div>
+            <div class="wf-asset-empty-desc">英镑、美元、加拿大元、日元、欧元、新西兰元、新加坡元、澳元、港元及离岸人民币都能轻松收款 立即认证您的账户，畅享安全便捷收款体验</div>
+            <div class="wf-asset-empty-link">开立货币账户 ›</div>
+          </div>
+        </div>
+
+        <!-- 账户近期交易 -->
+        <div class="wf-card">
+          <div class="wf-card-title">账户近期交易</div>
+          <div style="text-align:center;padding:32px 0;color:var(--wf-text-muted);font-size:13px;">
+            📂 暂无近期交易
+          </div>
+        </div>
+      </div>
+
+      <!-- Right side -->
+      <div class="wf-content-side">
+        <!-- 金融日历 -->
+        <div class="wf-side-card">
+          <div class="wf-side-title">金融日历</div>
+          <div style="font-size:13px;color:var(--wf-text-secondary);line-height:20px;">
+            今天无币种假期，您的交易不受任何影响
+          </div>
+          <div style="margin-top:8px;color:var(--wf-link);font-size:13px;">查看详情 ›</div>
+        </div>
+
+        <!-- 福利中心 -->
+        <div class="wf-side-card">
+          <div class="wf-side-title">福利中心</div>
+          <div style="background:linear-gradient(135deg,#FFE4B5,#FFB07F);border-radius:10px;padding:14px;margin-bottom:10px;color:#7A3500;">
+            <div style="font-size:13px;font-weight:600;">扬帆季 · 入金挑战</div>
+            <div style="font-size:11px;margin-top:4px;">入金达标即获 <strong>¥88</strong></div>
+          </div>
+          <div style="background:linear-gradient(135deg,#FFCEDB,#FFA1B6);border-radius:10px;padding:14px;color:#8B0036;margin-bottom:10px;">
+            <div style="font-size:13px;font-weight:600;">跨境电商"0"费率</div>
+            <div style="font-size:11px;margin-top:4px;">最高享￥100万免费额度</div>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:12px;padding:6px 0;border-top:1px solid var(--wf-border-soft);">
+            <span>推荐有礼</span>
+            <span class="text-secondary">赢现金红包 ›</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:12px;padding:6px 0;">
+            <span>产品更新</span>
+            <span class="text-secondary">获悉最新产品动态 ›</span>
+          </div>
+          <div style="margin-top:8px;color:var(--wf-link);font-size:13px;">我的权益 ›</div>
+        </div>
+
+        <!-- 实时汇率 -->
+        <div class="wf-side-card">
+          <div class="wf-side-title" style="display:flex;align-items:center;justify-content:space-between;">
+            <span>实时汇率 <span class="wf-card-subtitle">最后更新于 23:06</span></span>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--wf-text-secondary);margin-bottom:8px;">
+            <span>汇率收藏</span>
+            <span style="color:var(--wf-link);">✎ 编辑</span>
+          </div>
+          <div class="wf-fx-row">
+            <span class="wf-fx-pair">1 USD → 6.7802 CNH</span>
+            <svg class="wf-fx-spark" viewBox="0 0 50 18">
+              <polyline points="0,12 8,10 16,14 24,8 32,11 40,5 50,7" fill="none" stroke="#FF4D4D" stroke-width="1.2"/>
+            </svg>
+          </div>
+          <div class="wf-fx-row">
+            <span class="wf-fx-pair">1 EUR → 7.7054 CNH</span>
+            <svg class="wf-fx-spark" viewBox="0 0 50 18">
+              <polyline points="0,8 10,11 18,7 26,12 34,9 42,13 50,10" fill="none" stroke="#FF4D4D" stroke-width="1.2"/>
+            </svg>
+          </div>
+          <div class="wf-fx-row">
+            <span class="wf-fx-pair">1 GBP → 8.9349 CNH</span>
+            <svg class="wf-fx-spark" viewBox="0 0 50 18">
+              <polyline points="0,10 8,14 16,9 24,11 32,6 40,9 50,5" fill="none" stroke="#00A870" stroke-width="1.2"/>
+            </svg>
+          </div>
+          <div class="wf-fx-row">
+            <span class="wf-fx-pair">1 CAD → 4.7688 CNH</span>
+            <svg class="wf-fx-spark" viewBox="0 0 50 18">
+              <polyline points="0,9 10,7 18,11 26,8 34,12 42,9 50,11" fill="none" stroke="#FF4D4D" stroke-width="1.2"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Floating actions -->
+  <div class="wf-floating-actions">
+    <button title="提示">💡</button>
+    <button title="扫码下载">📱</button>
+    <button title="客服">？</button>
+  </div>
+</div>
+
+<script>
+function goExchange() {
+  window.location.href = 'exchange.html';
+}
+</script>
+</body>
+</html>

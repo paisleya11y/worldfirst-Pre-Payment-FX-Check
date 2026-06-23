@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WorldFirst AI 资金建议 · 方案文档</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;color:#1a1a1a;background:#fff;line-height:1.7;font-size:15px;-webkit-font-smoothing:antialiased;}
+
+/* 顶部导航 */
+.topbar{position:sticky;top:0;background:rgba(255,255,255,0.95);backdrop-filter:blur(8px);border-bottom:1px solid #f0e0e7;z-index:100;}
+.topbar-inner{max-width:1080px;margin:0 auto;padding:14px 32px;display:flex;align-items:center;justify-content:space-between;}
+.topbar-title{font-size:14px;font-weight:600;color:#1a1a1a;}
+.topbar-title em{font-style:normal;color:#FF0051;}
+.topbar-meta{font-size:12px;color:#999;}
+
+/* 左侧浮动大纲 */
+.outline{position:fixed;left:24px;top:96px;width:200px;max-height:calc(100vh - 140px);overflow-y:auto;font-size:12px;z-index:50;padding:16px 0;}
+.outline-title{font-size:11px;color:#94a3b8;font-weight:700;letter-spacing:1.5px;margin-bottom:14px;padding-left:12px;text-transform:uppercase;}
+.outline ul{list-style:none;padding:0;margin:0;}
+.outline li{margin:0;}
+.outline a{display:block;padding:5px 12px;color:#94a3b8;text-decoration:none;border-left:2px solid transparent;line-height:1.5;transition:all 0.15s;cursor:pointer;}
+.outline a:hover{color:#FF0051;border-left-color:#FCD9E5;}
+.outline a.active{color:#FF0051;border-left-color:#FF0051;background:#FFF5F8;font-weight:600;}
+.outline a.lvl-1{font-size:12px;font-weight:600;color:#475569;padding-left:12px;margin-top:8px;}
+.outline a.lvl-1:first-child{margin-top:0;}
+.outline a.lvl-1.active{color:#FF0051;}
+.outline a.lvl-2{font-size:11px;padding-left:24px;color:#94a3b8;}
+@media (max-width: 1280px){
+  .outline{display:none;}
+}
+
+/* 章节通用 */
+section{max-width:1080px;margin:0 auto;padding:64px 32px;border-bottom:1px solid #f5edf1;}
+
+/* 大屏：主内容左侧腾出 240px 给浮动大纲，避免遮挡正文 */
+@media (min-width: 1281px) and (max-width: 1620px){
+  section, .toc, .hero{margin-left:240px !important;}
+}
+.section-num{display:inline-block;font-size:13px;font-weight:600;color:#fff;background:#FF0051;padding:4px 12px;border-radius:4px;margin-bottom:16px;letter-spacing:0.5px;}
+.section-title{font-size:32px;font-weight:700;color:#0f172a;margin-bottom:32px;letter-spacing:-0.5px;}
+h3{font-size:20px;font-weight:600;color:#0f172a;margin:32px 0 16px;}
+h4{font-size:16px;font-weight:600;color:#1e293b;margin:24px 0 12px;}
+p{margin-bottom:14px;color:#334155;}
+ul,ol{padding-left:22px;margin-bottom:14px;}
+li{margin-bottom:8px;color:#334155;}
+strong{color:#0f172a;font-weight:600;}
+em{color:#FF0051;font-style:normal;font-weight:600;}
+
+/* 首屏 hero */
+.hero{padding:80px 32px 64px;text-align:center;border-bottom:1px solid #f5edf1;}
+.hero-tag{display:inline-block;background:#FFE5EC;color:#B8003F;font-size:13px;padding:6px 14px;border-radius:20px;margin-bottom:24px;font-weight:500;}
+.hero-title{font-size:46px;font-weight:700;color:#0f172a;margin-bottom:16px;letter-spacing:-1px;line-height:1.2;}
+.hero-title em{color:#FF0051;font-style:normal;}
+.hero-sub{font-size:18px;color:#64748b;margin-bottom:32px;max-width:760px;margin-left:auto;margin-right:auto;}
+.hero-meta{display:inline-flex;gap:24px;font-size:13px;color:#94a3b8;flex-wrap:wrap;justify-content:center;}
+.hero-meta span strong{color:#475569;font-weight:600;}
+
+/* TOC 卡 */
+.toc{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:1080px;margin:32px auto 0;padding:0 32px;}
+.toc-item{background:#FFF7FA;border:1px solid #FCD9E5;padding:14px 16px;border-radius:8px;font-size:13px;color:#475569;cursor:pointer;transition:all 0.2s;text-decoration:none;display:block;}
+.toc-item:hover{background:#FFF0F5;border-color:#FFB3CC;color:#FF0051;}
+.toc-item-num{font-weight:700;color:#FF0051;font-size:11px;margin-bottom:4px;letter-spacing:1px;}
+.toc-item-title{font-weight:500;}
+
+/* 对比卡 */
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:24px 0;}
+.compare-card{padding:20px 22px;border-radius:10px;border:1px solid #e2e8f0;}
+.compare-card.before{background:#fff7ed;border-color:#fed7aa;}
+.compare-card.after{background:#FFF5F8;border-color:#FCD9E5;}
+.compare-tag{display:inline-block;font-size:11px;font-weight:700;padding:3px 10px;border-radius:4px;margin-bottom:12px;letter-spacing:0.5px;}
+.compare-card.before .compare-tag{background:#fb923c;color:#fff;}
+.compare-card.after .compare-tag{background:#FF0051;color:#fff;}
+.compare-card h4{margin:0 0 12px;font-size:16px;}
+.compare-card ul{padding-left:18px;margin:0;}
+.compare-card li{margin-bottom:6px;font-size:14px;}
+.compare-card .compare-time{font-size:12px;color:#64748b;margin-top:10px;border-top:1px solid rgba(0,0,0,0.06);padding-top:8px;}
+
+/* workflow 流程图（参考 Mermaid：主链 + 追问支线） */
+.workflow-wrap{margin:32px 0 8px;background:#fff;border:1px solid #edf0f5;border-radius:12px;padding:24px;overflow-x:auto;}
+.workflow-canvas{position:relative;min-width:1320px;height:258px;background:#fff;}
+.flow-node{position:absolute;width:172px;min-height:66px;background:#fff;border:1px solid #e2e5ea;border-radius:2px;display:flex;align-items:center;justify-content:center;text-align:center;padding:10px 12px;color:#111827;line-height:1.35;font-size:14px;font-weight:500;}
+.flow-node.large{width:202px;min-height:76px;}
+.flow-node.branch{width:190px;min-height:72px;}
+.flow-node.feedback{width:150px;}
+.flow-sub{display:block;font-size:12px;color:#475569;font-weight:400;margin-top:2px;}
+.flow-line{position:absolute;height:1.5px;background:#4b5563;transform-origin:left center;}
+.flow-line::after{content:"";position:absolute;right:-1px;top:50%;transform:translateY(-50%);border-left:8px solid #4b5563;border-top:5px solid transparent;border-bottom:5px solid transparent;}
+.flow-dash{position:absolute;border-top:1.5px dashed #6b7280;height:0;transform-origin:left center;}
+.flow-dash::after{content:"";position:absolute;right:-1px;top:-5px;border-left:7px solid #6b7280;border-top:5px solid transparent;border-bottom:5px solid transparent;}
+.flow-label{position:absolute;font-size:12px;color:#1f2937;background:#fff;padding:0 6px;line-height:1;}
+.flow-path{position:absolute;left:0;top:0;width:1320px;height:258px;pointer-events:none;}
+.flow-path path{fill:none;stroke:#4b5563;stroke-width:1.5;}
+.flow-path .dash-path{stroke:#6b7280;stroke-dasharray:3.5 4;}
+.flow-path marker path{fill:#4b5563;}
+.flow-path marker.dash-marker path{fill:#6b7280;}
+
+/* 设计点卡片 */
+.design-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin:24px 0;}
+.design-card{background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:22px;border-left:4px solid #FF0051;}
+.design-card h4{margin:0 0 8px;font-size:16px;color:#0f172a;}
+.design-card .design-tag{display:inline-block;font-size:11px;background:#FFE5EC;color:#B8003F;padding:2px 8px;border-radius:3px;margin-bottom:8px;font-weight:600;}
+.design-card p{font-size:13px;color:#475569;margin-bottom:8px;}
+.design-card .design-why{background:#FFF7FA;padding:10px 12px;border-radius:6px;font-size:12px;color:#64748b;margin-top:10px;}
+.design-card .design-why strong{color:#FF0051;}
+.design-card.silent{border-left-color:#16a34a;}
+.design-card.silent .design-tag{background:#dcfce7;color:#166534;}
+.design-card.silent .design-why strong{color:#16a34a;}
+.design-card.warn{border-left-color:#d97706;}
+.design-card.warn .design-tag{background:#fef3c7;color:#92400e;}
+.design-card.warn .design-why strong{color:#d97706;}
+.design-card.danger{border-left-color:#dc2626;}
+.design-card.danger .design-tag{background:#fee2e2;color:#b91c1c;}
+.design-card.danger .design-why strong{color:#dc2626;}
+
+/* case 块 */
+.case{background:#fafbfc;border:1px solid #e2e8f0;border-radius:10px;padding:24px;margin:20px 0;}
+.case-header{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
+.case-tag{background:#FFE5EC;color:#B8003F;font-size:11px;padding:3px 10px;border-radius:4px;font-weight:600;}
+.case-title{font-size:16px;font-weight:600;color:#0f172a;}
+.case-narrative{background:#fff;border-left:3px solid #FF0051;padding:16px 20px;border-radius:0 8px 8px 0;margin:16px 0;font-size:14px;color:#334155;line-height:1.75;}
+.case-narrative strong{color:#0f172a;}
+.case-flow{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:16px;}
+.case-flow-step{background:#fff;padding:14px 14px;border-radius:8px;border:1px solid #e2e8f0;font-size:13px;}
+.case-flow-step .csn{font-weight:700;color:#FF0051;font-size:11px;display:block;margin-bottom:6px;letter-spacing:0.5px;}
+.case-flow-step strong{color:#0f172a;display:block;margin-bottom:4px;font-size:13px;}
+.case-flow-step span{color:#64748b;font-size:12px;line-height:1.5;}
+
+/* 度量指标表 */
+.metric-table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13px;}
+.metric-table th,.metric-table td{padding:10px 14px;text-align:left;border-bottom:1px solid #e2e8f0;vertical-align:top;}
+.metric-table th{background:#FFF7FA;font-weight:600;color:#475569;font-size:12px;letter-spacing:0.3px;}
+.metric-table td{color:#334155;}
+.metric-table .metric-name{font-weight:600;color:#0f172a;}
+.metric-table .metric-target{color:#FF0051;font-weight:600;}
+.metric-table .pillar{font-weight:600;color:#FF0051;}
+
+/* AI 杠杆度 dot */
+.lev-dot{display:inline-block;color:#FF0051;letter-spacing:1px;font-size:12px;}
+
+/* 风险表 */
+.risk-list{display:grid;gap:12px;margin:16px 0;}
+.risk-item{display:grid;grid-template-columns:90px 1fr 1fr;gap:16px;padding:14px 18px;background:#fff;border:1px solid #e2e8f0;border-radius:8px;align-items:center;}
+.risk-level{display:inline-block;font-size:11px;padding:3px 8px;border-radius:3px;font-weight:700;text-align:center;}
+.risk-level.high{background:#fee2e2;color:#b91c1c;}
+.risk-level.mid{background:#fef3c7;color:#92400e;}
+.risk-level.low{background:#FFE5EC;color:#B8003F;}
+.risk-desc{font-size:13px;color:#334155;}
+.risk-desc strong{color:#0f172a;}
+.risk-mitigation{font-size:12px;color:#64748b;}
+
+/* 关键引用 */
+.callout{background:linear-gradient(135deg,#FFF5F8,#FFE5EC);border-left:4px solid #FF0051;padding:18px 22px;border-radius:6px;margin:20px 0;}
+.callout p{margin:0;font-size:14px;color:#9b0036;}
+.callout strong{color:#7d002b;}
+
+/* 价值链条 */
+.valuechain{text-align:center;font-size:15px;color:#475569;background:#FFF7FA;padding:16px;border-radius:8px;margin:8px 0 16px;letter-spacing:0.5px;border:1px solid #FCD9E5;}
+.valuechain em{color:#FF0051;font-style:normal;font-weight:600;}
+
+/* 信息关联表 */
+.relate-table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px;background:#fff;border:1px solid #e2e8f0;border-radius:8px;overflow:hidden;}
+.relate-table th{background:#FFF7FA;color:#475569;padding:10px 14px;text-align:left;font-size:12px;font-weight:600;}
+.relate-table td{padding:10px 14px;border-top:1px solid #eef2f7;color:#334155;}
+.relate-table td:first-child{font-weight:600;color:#0f172a;}
+.relate-table td:last-child{color:#FF0051;font-family:-apple-system,monospace;font-size:12px;}
+
+/* 三策略 */
+.strategy-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:20px 0;}
+.strategy-card{background:#FFF7FA;border:1px solid #FCD9E5;border-radius:10px;padding:18px 20px;}
+.strategy-card .s-num{font-size:11px;font-weight:700;color:#FF0051;letter-spacing:1px;margin-bottom:6px;}
+.strategy-card h4{margin:0 0 8px;font-size:15px;color:#0f172a;}
+.strategy-card p{font-size:13px;color:#475569;margin:0;line-height:1.6;}
+
+/* 用途驱动 vs 汇率驱动 对比 */
+.shift-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:20px 0;}
+.shift-card{padding:20px 22px;border-radius:10px;border:1px solid #e2e8f0;}
+.shift-card.old{background:#fafafa;border-color:#e5e7eb;opacity:0.85;}
+.shift-card.new{background:#FFF5F8;border-color:#FCD9E5;}
+.shift-card .shift-tag{display:inline-block;font-size:11px;font-weight:700;padding:3px 10px;border-radius:4px;margin-bottom:10px;letter-spacing:0.5px;}
+.shift-card.old .shift-tag{background:#9ca3af;color:#fff;}
+.shift-card.new .shift-tag{background:#FF0051;color:#fff;}
+.shift-card h4{margin:0 0 10px;font-size:15px;color:#0f172a;}
+.shift-card .shift-line{font-size:12px;color:#64748b;display:flex;gap:10px;padding:6px 0;border-bottom:1px dashed #e5e7eb;}
+.shift-card .shift-line:last-child{border-bottom:none;}
+.shift-card .shift-line strong{color:#1f2937;display:inline-block;width:88px;flex-shrink:0;}
+.shift-card.new .shift-line strong{color:#FF0051;}
+
+/* 能力说明（精简） */
+.capability-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:20px 0;}
+.capability-card{background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:16px 18px;}
+.capability-card .cap-num{font-size:11px;font-weight:700;color:#FF0051;letter-spacing:0.5px;margin-bottom:4px;}
+.capability-card h4{font-size:14px;margin:0 0 6px;color:#0f172a;}
+.capability-card p{font-size:12px;color:#64748b;margin:0;line-height:1.6;}
+
+/* 场景拆解 */
+.scenario-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:20px 0;}
+.scenario-card{background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:18px 20px;}
+.scenario-card .sn-tag{display:inline-block;font-size:11px;background:#FFE5EC;color:#B8003F;padding:2px 8px;border-radius:3px;font-weight:600;margin-bottom:6px;}
+.scenario-card h4{margin:6px 0 8px;font-size:15px;color:#0f172a;}
+.scenario-card .sn-q{font-size:13px;color:#FF0051;font-style:italic;margin-bottom:8px;}
+.scenario-card p{font-size:12px;color:#64748b;margin:0;line-height:1.6;}
+
+/* 不做什么 */
+.not-do{background:#fff7ed;border:1px solid #fed7aa;border-radius:10px;padding:18px 22px;margin:20px 0;}
+.not-do h4{margin:0 0 12px;font-size:14px;color:#9a3412;}
+.not-do ul{padding-left:18px;margin:0;}
+.not-do li{font-size:13px;color:#7c2d12;margin-bottom:6px;}
+
+/* 蚂蚁四象限图 */
+.ant-map{background:#fff;border:1px solid #FCD9E5;border-radius:12px;padding:32px 24px;margin:24px 0;}
+.ant-map-bettr{display:flex;justify-content:center;margin-bottom:8px;}
+.ant-map-bettr-card{background:#FFF5F8;border:1.5px dashed #FF0051;border-radius:10px;padding:10px 18px;text-align:center;min-width:180px;}
+.ant-map-bettr-card .pillar-title{font-size:11px;color:#64748b;margin-bottom:2px;}
+.ant-map-bettr-card .pillar-name{font-size:16px;font-weight:700;color:#FF0051;margin-bottom:2px;}
+.ant-map-bettr-card .pillar-sub{font-size:10px;color:#94a3b8;}
+.ant-map-bettr-line{height:24px;display:flex;justify-content:center;align-items:center;position:relative;}
+.ant-map-bettr-line::before{content:'';width:60%;height:1.5px;border-top:1.5px dashed #FF0051;}
+.ant-map-three{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:0;align-items:stretch;}
+.ant-map-pillar{background:#fff;border:2px solid #FFD6E3;border-radius:12px;padding:18px 16px;text-align:center;position:relative;}
+.ant-map-pillar.highlight{border-color:#FF0051;background:linear-gradient(180deg,#FFF5F8 0%,#FFFFFF 100%);box-shadow:0 4px 16px rgba(255,0,81,0.08);}
+.ant-map-pillar .pillar-icon{width:40px;height:40px;border-radius:50%;background:#FFF0F5;color:#FF0051;display:inline-flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:8px;}
+.ant-map-pillar.highlight .pillar-icon{background:#FF0051;color:#fff;}
+.ant-map-pillar .pillar-tag{font-size:11px;color:#64748b;margin-bottom:4px;}
+.ant-map-pillar .pillar-name{font-size:18px;font-weight:700;color:#0f172a;margin-bottom:2px;}
+.ant-map-pillar.highlight .pillar-name{color:#FF0051;}
+.ant-map-pillar .pillar-sub{font-size:11px;color:#94a3b8;}
+.ant-map-arrow{display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:11px;color:#FF0051;font-weight:600;padding:0 6px;}
+.ant-map-arrow .arrow-line{font-size:18px;line-height:1;}
+.ant-map-network{margin-top:24px;background:linear-gradient(90deg,#FF0051 0%,#FF2E63 100%);color:#fff;border-radius:10px;padding:14px;text-align:center;font-size:13px;font-weight:600;letter-spacing:1px;}
+.ant-map-network span{font-size:11px;opacity:0.9;font-weight:400;display:block;margin-top:2px;letter-spacing:0.3px;}
+
+/* Payment 行业全景图 */
+.payment-chain{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:28px 24px;margin:24px 0;overflow-x:auto;}
+.payment-chain-title{font-size:13px;font-weight:600;color:#64748b;margin-bottom:16px;letter-spacing:0.5px;}
+.payment-chain-row{display:flex;align-items:center;gap:6px;flex-wrap:nowrap;min-width:720px;}
+.payment-node{padding:10px 12px;border:1.5px solid #e2e8f0;border-radius:8px;background:#fafbfc;font-size:12px;text-align:center;min-width:88px;flex-shrink:0;color:#64748b;}
+.payment-node.highlight{border-color:#FF0051;background:linear-gradient(180deg,#FFF5F8,#fff);color:#FF0051;font-weight:600;box-shadow:0 2px 8px rgba(255,0,81,0.1);}
+.payment-node .node-label{font-size:11px;color:#94a3b8;margin-bottom:2px;}
+.payment-node.highlight .node-label{color:#FF0051;opacity:0.8;}
+.payment-node strong{display:block;font-size:13px;font-weight:600;color:#0f172a;}
+.payment-node.highlight strong{color:#FF0051;}
+.payment-arr{color:#cbd5e1;font-size:14px;flex-shrink:0;}
+.payment-arr.strong{color:#FF0051;font-weight:700;}
+.payment-chain-note{margin-top:14px;padding:12px 16px;background:#FFF7FA;border-left:3px solid #FF0051;border-radius:0 6px 6px 0;font-size:12px;color:#475569;line-height:1.7;}
+.payment-chain-note strong{color:#FF0051;}
+.payment-chain-secondary{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:12px;font-size:11px;color:#94a3b8;}
+.payment-chain-secondary span{padding:4px 10px;background:#f1f5f9;border-radius:999px;}
+
+/* WorldFirst 内部资金链路 */
+.wf-chain{background:#FFF7FA;border:1px solid #FCD9E5;border-radius:12px;padding:24px;margin:24px 0;overflow-x:auto;}
+.wf-chain-title{font-size:13px;font-weight:600;color:#FF0051;margin-bottom:18px;letter-spacing:0.5px;}
+.wf-chain-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;min-width:680px;}
+.wf-chain-stage{background:#fff;border:1.5px solid #FCD9E5;border-radius:10px;padding:14px 12px;text-align:center;position:relative;}
+.wf-chain-stage.pivot{border:2px solid #FF0051;background:linear-gradient(180deg,#FFF0F5,#FFFFFF);box-shadow:0 4px 14px rgba(255,0,81,0.12);}
+.wf-chain-stage .stage-num{font-size:11px;color:#FF0051;font-weight:700;letter-spacing:0.5px;margin-bottom:4px;}
+.wf-chain-stage .stage-label{font-size:14px;font-weight:600;color:#0f172a;margin-bottom:8px;}
+.wf-chain-stage.pivot .stage-label{color:#FF0051;}
+.wf-chain-stage .stage-products{font-size:11px;color:#64748b;line-height:1.7;}
+.wf-chain-stage .stage-products strong{color:#1f2937;font-weight:600;display:block;}
+.wf-chain-stage.pivot .stage-products strong{color:#FF0051;}
+.wf-chain-pivot-tag{position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:#FF0051;color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:8px;letter-spacing:0.5px;white-space:nowrap;}
+
+/* footer */
+footer{background:#FFF7FA;padding:32px;text-align:center;color:#94a3b8;font-size:12px;}
+footer p{margin:4px 0;color:#94a3b8;}
+
+@media (max-width: 768px){
+  .toc{grid-template-columns:repeat(2,1fr);}
+  .compare,.design-grid,.scenario-grid,.shift-grid,.strategy-grid,.capability-grid,.case-flow{grid-template-columns:1fr;}
+  .hero-title{font-size:30px;}
+  .section-title{font-size:24px;}
+  .topbar-nav{display:none;}
+  .risk-item{grid-template-columns:1fr;}
+  .ant-map-three{grid-template-columns:1fr;gap:10px;}
+  .ant-map-arrow{transform:rotate(90deg);padding:4px 0;}
+  .wf-chain-grid{grid-template-columns:repeat(2,1fr);}
+}
+</style>
+</head>
+<body>
+
+<!-- 顶部 sticky 导航 -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="topbar-title">WorldFirst · <em>AI 资金建议</em></div>
+    <div class="topbar-meta">v3.0 · 2026-06-24</div>
+  </div>
+</div>
+
+<!-- 左侧浮动大纲 -->
+<nav class="outline" id="outline">
+  <div class="outline-title">CONTENTS</div>
+  <ul>
+    <li><a href="#ch1" class="lvl-1">01 项目背景</a></li>
+    <li><a href="#h-1-1" class="lvl-2">1.1 蚂蚁国际四象限定位</a></li>
+    <li><a href="#h-1-2" class="lvl-2">1.2 Payment 行业链路</a></li>
+    <li><a href="#h-1-3" class="lvl-2">1.3 资金生命周期</a></li>
+    <li><a href="#h-1-4" class="lvl-2">1.4 目标用户</a></li>
+
+    <li><a href="#ch2" class="lvl-1">02 现状痛点</a></li>
+    <li><a href="#h-2-1" class="lvl-2">2.1 流程 vs 心智</a></li>
+    <li><a href="#h-2-2" class="lvl-2">2.2 痛点拆解</a></li>
+    <li><a href="#h-2-3" class="lvl-2">2.3 痛点本质</a></li>
+
+    <li><a href="#ch3" class="lvl-1">03 需求目标</a></li>
+    <li><a href="#h-3-1" class="lvl-2">3.1 北极星指标</a></li>
+    <li><a href="#h-3-2" class="lvl-2">3.2 反向兜底</a></li>
+    <li><a href="#h-3-3" class="lvl-2">3.3 业务效果</a></li>
+    <li><a href="#h-3-4" class="lvl-2">3.4 系统可靠性</a></li>
+
+    <li><a href="#ch4" class="lvl-1">04 用户场景</a></li>
+    <li><a href="#h-4-1" class="lvl-2">4.1 触发条件</a></li>
+    <li><a href="#h-4-2" class="lvl-2">4.2 四类用途场景</a></li>
+    <li><a href="#h-4-3" class="lvl-2">4.3 不做什么</a></li>
+
+    <li><a href="#ch5" class="lvl-1">05 方案概述</a></li>
+    <li><a href="#h-5-0" class="lvl-2">5.0 关键认知升级</a></li>
+    <li><a href="#h-5-1" class="lvl-2">5.1 三条策略</a></li>
+    <li><a href="#h-5-2" class="lvl-2">5.2 产品定位</a></li>
+
+    <li><a href="#ch6" class="lvl-1">06 核心产品链路</a></li>
+    <li><a href="#ch7" class="lvl-1">07 产品能力说明</a></li>
+
+    <li><a href="#ch8" class="lvl-1">08 关键设计点</a></li>
+    <li><a href="#h-8-d5" class="lvl-2">D5 数据边界</a></li>
+    <li><a href="#h-8-d6" class="lvl-2">D6 措辞红线</a></li>
+
+    <li><a href="#ch9" class="lvl-1">09 用户 case</a></li>
+    <li><a href="#ch10" class="lvl-1">10 风险评估</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">📐 产品方案 · WorldFirst AI 资金建议</div>
+  <h1 class="hero-title">从「<em>换汇通道</em>」<br>到「<em>换汇前的资金决策</em>」</h1>
+  <p class="hero-sub">商家在 WorldFirst 兑换页输入金额时，分散在余额、历史付款、可结汇额度、凭证状态里的信息会被一次关联起来，给出与经营用途匹配的换汇路径建议。</p>
+  <div class="hero-meta">
+    <span>产品：<strong>WorldFirst AI 资金建议</strong></span>
+    <span>用户：<strong>跨境电商商家</strong></span>
+  </div>
+</div>
+
+<!-- TOC -->
+<div class="toc">
+  <a href="#ch1" class="toc-item"><div class="toc-item-num">01</div><div class="toc-item-title">项目背景</div></a>
+  <a href="#ch2" class="toc-item"><div class="toc-item-num">02</div><div class="toc-item-title">现状痛点</div></a>
+  <a href="#ch3" class="toc-item"><div class="toc-item-num">03</div><div class="toc-item-title">需求目标</div></a>
+  <a href="#ch4" class="toc-item"><div class="toc-item-num">04</div><div class="toc-item-title">用户场景与问题拆解</div></a>
+  <a href="#ch5" class="toc-item"><div class="toc-item-num">05</div><div class="toc-item-title">方案概述</div></a>
+  <a href="#ch6" class="toc-item"><div class="toc-item-num">06</div><div class="toc-item-title">核心产品链路</div></a>
+  <a href="#ch7" class="toc-item"><div class="toc-item-num">07</div><div class="toc-item-title">产品能力说明</div></a>
+  <a href="#ch8" class="toc-item"><div class="toc-item-num">08</div><div class="toc-item-title">关键设计点</div></a>
+  <a href="#ch9" class="toc-item"><div class="toc-item-num">09</div><div class="toc-item-title">用户 case</div></a>
+  <a href="#ch10" class="toc-item"><div class="toc-item-num">10</div><div class="toc-item-title">风险评估</div></a>
+</div>
+
+<!-- 章 1：项目背景 -->
+<section id="ch1">
+  <span class="section-num">01 / BACKGROUND</span>
+  <h2 class="section-title">项目背景</h2>
+
+  <h3 id="h-1-1">1.1 WorldFirst 在蚂蚁国际四象限中的定位</h3>
+  <p>蚂蚁国际通过四个产品板块 + 一套全球支付网络，覆盖跨境商业场景的不同环节。WorldFirst 是其中面向 B2B 企业端的板块。</p>
+
+  <div class="ant-map">
+    <!-- 顶部 Bettr -->
+    <div class="ant-map-bettr">
+      <div class="ant-map-bettr-card">
+        <div class="pillar-title">金融服务（小微）</div>
+        <div class="pillar-name">Bettr</div>
+        <div class="pillar-sub">API 嵌入 + 数字贷款</div>
+      </div>
+    </div>
+    <div class="ant-map-bettr-line"></div>
+
+    <!-- 三大业务板块 -->
+    <div class="ant-map-three">
+      <div class="ant-map-pillar">
+        <div class="pillar-icon">👤</div>
+        <div class="pillar-tag">消费者（C 端）</div>
+        <div class="pillar-name">Alipay+</div>
+        <div class="pillar-sub">钱包、支付</div>
+      </div>
+      <div class="ant-map-arrow">
+        <span>收单</span>
+        <span class="arrow-line">⇄</span>
+      </div>
+      <div class="ant-map-pillar">
+        <div class="pillar-icon">🏪</div>
+        <div class="pillar-tag">商户端（B 端）</div>
+        <div class="pillar-name">Antom</div>
+        <div class="pillar-sub">收单、营销、解决方案</div>
+      </div>
+      <div class="ant-map-arrow">
+        <span>收款</span>
+        <span class="arrow-line">⇄</span>
+      </div>
+      <div class="ant-map-pillar highlight">
+        <div class="pillar-icon">🏢</div>
+        <div class="pillar-tag">企业端（B2B）</div>
+        <div class="pillar-name">WorldFirst</div>
+        <div class="pillar-sub">收款、外汇、财资</div>
+      </div>
+    </div>
+
+    <!-- 底部 全球支付网络 -->
+    <div class="ant-map-network">
+      全球支付网络
+      <span>覆盖 210+ 国家与地区 · 25 个本地站点 · 区块链清算技术</span>
+    </div>
+  </div>
+
+  <p>WorldFirst 与 Antom 的分工：Antom 偏交易侧（让买家付得通、商户收得到），WorldFirst 偏经营侧（商家收到钱之后的账户、收付兑、资金管理）。本方案聚焦 WorldFirst 主战场——<strong>商家收到钱之后的资金动作</strong>。</p>
+
+  <p>把这套框架按"面向谁 / 核心角色 / 价值链位置"三个维度展开，能更清楚地看到 WorldFirst 与其他板块的边界：</p>
+  <table class="metric-table">
+    <thead><tr><th>板块</th><th>面向谁</th><th>核心角色</th><th>价值链位置</th></tr></thead>
+    <tbody>
+      <tr>
+        <td class="metric-name">Alipay+</td>
+        <td>C 端消费者、本地钱包用户</td>
+        <td>钱包互联、支付方式聚合</td>
+        <td>让消费者能用熟悉的钱包付款</td>
+      </tr>
+      <tr>
+        <td class="metric-name">Antom</td>
+        <td>全球商户、平台、线下线上商家</td>
+        <td>收单、支付处理、营销、风控</td>
+        <td>帮商户把支付收进来，提高支付成功率和转化</td>
+      </tr>
+      <tr>
+        <td class="metric-name pillar">WorldFirst</td>
+        <td class="pillar">跨境电商、外贸 B2B、平台企业、出海 SME</td>
+        <td class="pillar">全球账户、收款、付款、汇兑、资金管理</td>
+        <td class="pillar">帮企业把收进来的钱管起来、兑出去、付出去、周转起来</td>
+      </tr>
+      <tr>
+        <td class="metric-name">Bettr</td>
+        <td>SME、平台、金融合作方</td>
+        <td>嵌入式信贷、数字贷款</td>
+        <td>基于交易与经营数据提供资金支持</td>
+      </tr>
+      <tr>
+        <td class="metric-name">全球支付网络</td>
+        <td>银行、钱包、本地清算、牌照、风控</td>
+        <td>基础设施</td>
+        <td>降低跨境支付的路由、清算、合规和汇兑摩擦</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout">
+    <p><strong>WorldFirst 在集团里的战略意义：</strong>它把蚂蚁国际从"帮商家收消费者的钱"，延伸到"帮商家经营全球资金"。支付是一笔交易，资金管理是一个商家的<em>经营生命周期</em>——只要商家的收款、付款、换汇、融资、对账都在 WorldFirst 里发生，WorldFirst 就从工具变成<strong>经营入口</strong>。</p>
+  </div>
+
+  <h3 id="h-1-2">1.2 在 Payment 行业链路中，WorldFirst 接的是哪一段</h3>
+  <p>把整个 payment 行业的资金流动展开，就能看清楚 WorldFirst 在 Stripe / Adyen / Antom 这些收单玩家之外，承接的是另一段。</p>
+
+  <div class="payment-chain">
+    <div class="payment-chain-title">PAYMENT 行业全景 · 一笔跨境交易经过的环节</div>
+    <div class="payment-chain-row">
+      <div class="payment-node">
+        <div class="node-label">买家</div>
+        <strong>消费者</strong>
+      </div>
+      <span class="payment-arr">→</span>
+      <div class="payment-node">
+        <div class="node-label">收单链路</div>
+        <strong>Gateway</strong>
+      </div>
+      <span class="payment-arr">→</span>
+      <div class="payment-node">
+        <div class="node-label">收单链路</div>
+        <strong>Processor</strong>
+      </div>
+      <span class="payment-arr">→</span>
+      <div class="payment-node">
+        <div class="node-label">收单链路</div>
+        <strong>Acquirer</strong>
+      </div>
+      <span class="payment-arr strong">⟹</span>
+      <div class="payment-node highlight">
+        <div class="node-label">★ 资金管理</div>
+        <strong>WorldFirst</strong>
+      </div>
+      <span class="payment-arr">→</span>
+      <div class="payment-node">
+        <div class="node-label">资金出口</div>
+        <strong>商家经营</strong>
+      </div>
+    </div>
+    <div class="payment-chain-secondary">
+      <span>Antom</span>
+      <span>Stripe</span>
+      <span>Adyen</span>
+      <span>Square</span>
+      <span style="color:#94a3b8;">← 收单赛道集中在这一段</span>
+    </div>
+    <div class="payment-chain-note">
+      <strong>关键判断：</strong>WorldFirst 的主战场不在收单链路（Gateway / Processor / Acquirer 那一段），而是在 acquiring 完成<strong>之后</strong>——商家钱已经到账，但还没花出去的<strong>那 7~30 天</strong>。这一段是 Stripe / Adyen / Antom 投入最少的环节，也是 Airwallex / Payoneer / WorldFirst 共同竞争的赛道。
+    </div>
+  </div>
+
+  <h3 id="h-1-3">1.3 商家资金生命周期与本方案切入点</h3>
+  <p>把 WorldFirst 内部能力按"商家钱进来到花出去"的时序展开，会得到六个连续阶段。本方案聚焦其中一个阶段。</p>
+
+  <div class="wf-chain">
+    <div class="wf-chain-title">WORLDFIRST 内部资金链路 · 商家钱的六个阶段</div>
+    <div class="wf-chain-grid">
+      <div class="wf-chain-stage">
+        <div class="stage-num">L1</div>
+        <div class="stage-label">钱进来</div>
+        <div class="stage-products">
+          <strong>World Account</strong>
+          多币种账户<br>店铺管理
+        </div>
+      </div>
+      <div class="wf-chain-stage">
+        <div class="stage-num">L2</div>
+        <div class="stage-label">看清楚</div>
+        <div class="stage-products">
+          <strong>资金看板</strong>
+          账单管理<br>多账号
+        </div>
+      </div>
+      <div class="wf-chain-stage pivot">
+        <span class="wf-chain-pivot-tag">★ 本方案切入</span>
+        <div class="stage-num">L3</div>
+        <div class="stage-label">换得对</div>
+        <div class="stage-products">
+          <strong>货币兑换 + AI 建议卡</strong>
+          安心兑（远期锁汇）
+        </div>
+      </div>
+      <div class="wf-chain-stage">
+        <div class="stage-num">L4</div>
+        <div class="stage-label">付出去</div>
+        <div class="stage-products">
+          <strong>全球付款</strong>
+          跨境宝<br>万里付卡
+        </div>
+      </div>
+      <div class="wf-chain-stage">
+        <div class="stage-num">L5</div>
+        <div class="stage-label">留下来</div>
+        <div class="stage-products">
+          <strong>万余盈</strong>
+          活期理财
+        </div>
+      </div>
+      <div class="wf-chain-stage">
+        <div class="stage-num">L6</div>
+        <div class="stage-label">转起来</div>
+        <div class="stage-products">
+          <strong>极速融</strong>
+          短期信贷
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p>L3「换汇」是六个阶段中决策密度最高的一环：它的最优解需要同时调用 L1（多少钱进来）、L4（要付多少出去）、L5（能不能留存）、L6（差额能不能借）。<strong>这意味着 L3 的好坏不取决于"换汇页本身做得多好"，而取决于"L1–L6 的信息能不能被一次关联"。</strong>这是本方案选择切入 L3 的根本原因。</p>
+
+  <h3 id="h-1-4">1.4 目标用户</h3>
+  <table class="metric-table">
+    <thead><tr><th>维度</th><th>描述</th></tr></thead>
+    <tbody>
+      <tr><td class="metric-name">年 GMV</td><td>100–3000 万美元</td></tr>
+      <tr><td class="metric-name">经营特征</td><td>多平台经营（Amazon、TikTok Shop、Shopify、Shopee 中至少 2 个）</td></tr>
+      <tr><td class="metric-name">币种敞口</td><td>同时持有 3 种以上（USD、EUR、GBP、JPY 等）</td></tr>
+      <tr><td class="metric-name">决策频次</td><td>周均 1–2 次结汇决策</td></tr>
+      <tr><td class="metric-name">团队</td><td>老板 + 兼职会计，无专职 treasury 团队</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout">
+    <p><strong>本方案不新增任何业务模块。</strong>L1–L6 各阶段的能力已经存在；所做的只是在 L3 节点上加一层决策辅助，把这些已有能力按"商家此刻的经营用途"重新组织一次。</p>
+  </div>
+</section>
+
+<!-- 章 2：现状痛点 -->
+<section id="ch2">
+  <span class="section-num">02 / PAIN POINTS</span>
+  <h2 class="section-title">现状痛点</h2>
+
+  <h3 id="h-2-1">2.1 现状产品流程 vs 商家真实决策心智</h3>
+  <p>这一节是整份方案的起点。对比的是：当前线上 WorldFirst 兑换页给商家的步骤，与商家心里其实需要走完的步骤之间的差距。</p>
+
+  <div class="compare">
+    <div class="compare-card before">
+      <span class="compare-tag">现状产品流程</span>
+      <h4>三步走完，无任何决策辅助</h4>
+      <ul>
+        <li>进入兑换页</li>
+        <li>输入金额</li>
+        <li>点击「确认兑换」</li>
+      </ul>
+      <div class="compare-time">流程耗时：30 秒。但所有判断由商家自己心算完成。</div>
+    </div>
+    <div class="compare-card after">
+      <span class="compare-tag">商家真实决策心智</span>
+      <h4>六件事要想清楚，才敢按下确认</h4>
+      <ul>
+        <li>这笔钱换完是用于哪一项经营动作</li>
+        <li>本月还有哪些同币种付款承诺</li>
+        <li>本月可结汇额度够不够、凭证齐不齐</li>
+        <li>当前汇率位置是什么背景</li>
+        <li>路径成本：直接全换 vs 部分保留 vs 分批换</li>
+        <li>最终决定换多少、留多少</li>
+      </ul>
+      <div class="compare-time">实际耗时：15–30 分钟，且做完不一定对。</div>
+    </div>
+  </div>
+
+  <h3 id="h-2-2">2.2 痛点拆解</h3>
+  <p>对应 2.1 中六件事，归纳出五类高频痛点。<strong>「AI 杠杆度」</strong>这一列衡量"这件事如果由 AI 来关联和解释，能给商家省多少动作"。</p>
+  <table class="metric-table">
+    <thead>
+      <tr><th>痛点</th><th>商家原话</th><th>一年潜在成本（参考 ¥3000 万 GMV）</th><th>AI 杠杆度</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="metric-name">不知道这笔钱该不该全换</td>
+        <td>"全换还是分批？"</td>
+        <td>2–5 万</td>
+        <td><span class="lev-dot">★★★★★</span></td>
+      </tr>
+      <tr>
+        <td class="metric-name">不知道留外币还是换人民币</td>
+        <td>"下月广告费要不要留美元？"</td>
+        <td>4–10 万</td>
+        <td><span class="lev-dot">★★★★★</span></td>
+      </tr>
+      <tr>
+        <td class="metric-name">撞到结汇额度不足才发现</td>
+        <td>"为什么换不了？"</td>
+        <td>时间 + 延误付款</td>
+        <td><span class="lev-dot">★★★★</span></td>
+      </tr>
+      <tr>
+        <td class="metric-name">不会用锁汇 / 远期</td>
+        <td>"安心兑是什么？"</td>
+        <td>0–15 万（旺季）</td>
+        <td><span class="lev-dot">★★★★</span></td>
+      </tr>
+      <tr>
+        <td class="metric-name">决策后无反馈</td>
+        <td>"这次换得对吗？"</td>
+        <td>长期</td>
+        <td><span class="lev-dot">★★★</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3 id="h-2-3">2.3 痛点的本质：信息都在 WorldFirst，但没被关联</h3>
+  <p>2.2 表面上看起来是"商家不会判断"，但拆开来看是另一种结构——决策需要的信息其实<strong>都已经在 WorldFirst 后台</strong>，只是分散在五个不同的位置：</p>
+  <table class="relate-table">
+    <thead><tr><th>决策需要的信息</th><th>当前所在位置</th></tr></thead>
+    <tbody>
+      <tr><td>多币种余额</td><td>首页 · 我的资产</td></tr>
+      <tr><td>平台回款时间</td><td>账单管理中心</td></tr>
+      <tr><td>历史付款记录（含广告 / SaaS / 海外仓）</td><td>全球付款 · 历史记录</td></tr>
+      <tr><td>当前与历史汇率</td><td>首页 · 实时汇率</td></tr>
+      <tr><td>可结汇额度 + 凭证完整性</td><td>店铺管理 · 额度管理</td></tr>
+    </tbody>
+  </table>
+  <div class="callout">
+    <p><strong>核心判断：</strong>问题不是"信息不在一处"，而是"信息在一处但需要商家自己开五个 tab、自己心算关联"。AI 的价值不是搬运信息，是<em>关联</em>。</p>
+  </div>
+</section>
+
+<!-- 章 3：需求目标 -->
+<section id="ch3">
+  <span class="section-num">03 / GOALS</span>
+  <h2 class="section-title">需求目标</h2>
+
+  <h3 id="h-3-1">3.1 北极星指标</h3>
+  <div class="callout">
+    <p><strong>MVP 观察目标：有效决策完成率 40%+</strong></p>
+    <p style="margin-top:8px;">有效决策定义：用户在卡片浮现后完成以下任一动作——按建议部分兑换 / 保留外币 / 设置汇率提醒 / 跳转补凭证 / 在确认风险后继续原路径。</p>
+  </div>
+  <p>这个指标的设计逻辑是避免"卡片采纳率"这种容易诱导强推的单一指标。"在确认风险后继续原路径"也算有效决策——只要用户被帮助到，哪怕选择"我什么都不改"也算成功。</p>
+
+  <h3 id="h-3-2">3.2 反向兜底硬约束</h3>
+  <p>北极星不能孤立看，必须配反向指标兜底，否则容易被刷指标。任一项超过阈值，<strong>暂停灰度，复核 prompt 与策略规则</strong>。</p>
+  <table class="metric-table">
+    <thead><tr><th>指标</th><th>阈值</th><th>含义</th></tr></thead>
+    <tbody>
+      <tr><td class="metric-name">错误推荐率</td><td class="metric-target">&lt; 3%</td><td>财务师月抽审 100 笔，标注错误推荐</td></tr>
+      <tr><td class="metric-name">用户取消执行率</td><td class="metric-target">&lt; 8%</td><td>执行后 5 分钟内主动撤销的比例</td></tr>
+      <tr><td class="metric-name">卡片关闭率</td><td class="metric-target">&lt; 50%</td><td>卡片浮现后用户直接点 × 关闭的比例（高则代表打扰）</td></tr>
+    </tbody>
+  </table>
+
+  <h3 id="h-3-3">3.3 业务效果指标</h3>
+  <p>北极星衡量"用户被帮助到"，业务指标衡量"WorldFirst 因此获得了什么"。</p>
+  <table class="metric-table">
+    <thead><tr><th>指标</th><th>计算口径</th></tr></thead>
+    <tbody>
+      <tr><td class="metric-name">FX GMV 增量</td><td>有卡组 vs 无卡组的人均月度兑换额差异</td></tr>
+      <tr><td class="metric-name">二次换汇笔数减少</td><td>同一商家 30 天内"先 USD→CNH 又 CNH→USD"的笔数变化</td></tr>
+      <tr><td class="metric-name">凭证补传率</td><td>"额度不足"卡触达 → 补传凭证完成的转化率</td></tr>
+      <tr><td class="metric-name">安心兑 / 万余盈渗透率</td><td>仅在用户"暂时不用"场景的触发条件满足时计入，避免被强推数据污染</td></tr>
+    </tbody>
+  </table>
+
+  <h3 id="h-3-4">3.4 系统可靠性</h3>
+  <table class="metric-table">
+    <thead><tr><th>指标</th><th>含义</th></tr></thead>
+    <tbody>
+      <tr><td class="metric-name">LLM 接口延迟（P95）</td><td>从用户点「追问」到首字返回的时间</td></tr>
+      <tr><td class="metric-name">Function Calling 成功率</td><td>追问对话中调用内部数据 API 的成功率</td></tr>
+      <tr><td class="metric-name">Fallback 触发率</td><td>API 失败时回退到本地预设回答的比例</td></tr>
+      <tr><td class="metric-name">措辞合规检测率</td><td>对 LLM 输出的措辞红线词扫描命中率</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- 章 4：用户场景与问题拆解 -->
+<section id="ch4">
+  <span class="section-num">04 / SCENARIOS</span>
+  <h2 class="section-title">用户场景与问题拆解</h2>
+
+  <h3 id="h-4-1">4.1 触发场景与触发条件</h3>
+  <p>本方案只在一个场景下被触发：<strong>商家在「资金管理 → 货币兑换」页输入金额后</strong>。其他页面 MVP 阶段不触发，避免范围扩散。</p>
+  <table class="metric-table">
+    <thead><tr><th>条件类型</th><th>规则</th></tr></thead>
+    <tbody>
+      <tr><td class="metric-name">必须满足</td><td>金额 ≥ 1 万 USD 等值，且距离上次同币种兑换 &gt; 24 小时</td></tr>
+      <tr><td class="metric-name">不触发</td><td>小额（&lt; 1 万）、高频用户（24h 内已兑换）、用户已主动关闭过卡片</td></tr>
+    </tbody>
+  </table>
+
+  <h3 id="h-4-2">4.2 四类用途场景</h3>
+  <p>系统根据余额、历史付款记录、收款人类型、本次金额，自动识别四类用途场景。每类场景对应一种 AI 介入方式（详细介入策略见 08 章）。</p>
+
+  <div class="scenario-grid">
+    <div class="scenario-card">
+      <span class="sn-tag">场景 A · 付供应商</span>
+      <h4>用途明确，不需要 AI 多说话</h4>
+      <div class="sn-q">"我要付国内货款，今天换多少美元？"</div>
+      <p><strong>识别条件</strong>：历史付款偏向 RMB、收款人为国内供应商、金额在历史合理区间。<br>
+      <strong>用户问题</strong>：换多少够付？额度撑得住吗？凭证全吗？</p>
+    </div>
+
+    <div class="scenario-card">
+      <span class="sn-tag">场景 B · 保留外币付款</span>
+      <h4>会犯"二次换汇"错误的高频场景</h4>
+      <div class="sn-q">"我有美元，下月还要付广告/SaaS，是不是该全换？"</div>
+      <p><strong>识别条件</strong>：账上有外币余额、近 30 天有同币种付款记录、本次为大额结汇。<br>
+      <strong>用户问题</strong>：全换会不会下月再换回来？保留多少够？</p>
+    </div>
+
+    <div class="scenario-card">
+      <span class="sn-tag">场景 C · 暂时不用</span>
+      <h4>没有明确用途，最容易被错误引导</h4>
+      <div class="sn-q">"这笔外币暂时没用处，全换还是留？"</div>
+      <p><strong>识别条件</strong>：用户主动选择"暂时不用"，或历史无明确未来付款承诺。<br>
+      <strong>用户问题</strong>：现在汇率是高是低？分批好不好？要不要锁定？</p>
+    </div>
+
+    <div class="scenario-card">
+      <span class="sn-tag">场景 D · 额度不足</span>
+      <h4>合规硬约束被动撞墙</h4>
+      <div class="sn-q">"我想换，但为什么换不了？"</div>
+      <p><strong>识别条件</strong>：本次结汇金额超过本月可用额度，或检测到店铺有未补凭证的订单。<br>
+      <strong>用户问题</strong>：到底缺哪些凭证？补完要多久？这笔款延误了怎么办？</p>
+    </div>
+  </div>
+
+  <h3 id="h-4-3">4.3 不做什么（MVP 边界）</h3>
+  <div class="not-do">
+    <h4>明确划出 MVP 范围之外的事</h4>
+    <ul>
+      <li>不预测汇率走势——属金融预测，监管风险高</li>
+      <li>不做主动推送（首页推 / push）——Phase 2 再做，先验证被动浮现的卡片有效性</li>
+      <li>不扩展到付款页——Phase 2 再做，先把兑换页一个场景做透</li>
+      <li>不做现金流预测、ERP 集成——Phase 3，依赖外部数据源</li>
+      <li>不做 AI 自动执行——永远不做，资损与监管红线</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 章 5：方案概述 -->
+<section id="ch5">
+  <span class="section-num">05 / SOLUTION</span>
+  <h2 class="section-title">方案概述</h2>
+
+  <h3 id="h-5-0">5.0 关键认知升级：从「汇率驱动」到「用途驱动」</h3>
+  <p>本方案在迭代过程中经历了一次关键认知调整。早期版本的产品定位是"在兑换前帮商家判断该不该换"，本质是"汇率驱动"。后来发现这条路不通——一旦走"判断汇率"的方向，就会同时踩到三个坑：1）金融预测的合规边界；2）与银行 quant 工具的同质化；3）和商家的真实决策路径不一致。</p>
+  <p>真正的转折点是这个观察：<strong>商家换汇从来不是为了交易汇率本身，而是为了后续的某个经营动作。</strong>由此把策略输入从"汇率位置"改为"经营用途"——这是 WorldFirst 才能做、且银行 quant 工具做不了的事。</p>
+
+  <div class="shift-grid">
+    <div class="shift-card old">
+      <span class="shift-tag">早期版本（已弃）</span>
+      <h4>汇率驱动</h4>
+      <div class="shift-line"><strong>核心问题</strong><span>今天该不该换</span></div>
+      <div class="shift-line"><strong>策略输入</strong><span>汇率分位、历史走势、事件日历</span></div>
+      <div class="shift-line"><strong>依赖能力</strong><span>FX 预测模型</span></div>
+      <div class="shift-line"><strong>合规风险</strong><span>高（看起来像投资建议）</span></div>
+      <div class="shift-line"><strong>差异化</strong><span>与银行 quant 工具同质</span></div>
+    </div>
+    <div class="shift-card new">
+      <span class="shift-tag">当前方案</span>
+      <h4>用途驱动</h4>
+      <div class="shift-line"><strong>核心问题</strong><span>这笔钱换完做什么</span></div>
+      <div class="shift-line"><strong>策略输入</strong><span>历史付款、收款人类型、可结汇额度、凭证</span></div>
+      <div class="shift-line"><strong>依赖能力</strong><span>用途识别 + 数据关联</span></div>
+      <div class="shift-line"><strong>合规风险</strong><span>低（仅做用途识别和路径建议）</span></div>
+      <div class="shift-line"><strong>差异化</strong><span>独有 WorldFirst 内部数据，外部不可复制</span></div>
+    </div>
+  </div>
+
+  <h3 id="h-5-1">5.1 由此得出的三条策略</h3>
+  <div class="strategy-grid">
+    <div class="strategy-card">
+      <div class="s-num">策略 01</div>
+      <h4>用途驱动，不是汇率驱动</h4>
+      <p>策略输入的起点是"这笔钱换完做什么"，由系统根据历史付款记录主动推断，用户可一键修改。AI 不预测汇率走势，仅引用当前汇率所处的历史区间作为背景。</p>
+    </div>
+    <div class="strategy-card">
+      <div class="s-num">策略 02</div>
+      <h4>关联现有数据，不新增数据源</h4>
+      <p>所有策略输入仅来自 WorldFirst 内部高确定性数据：余额、历史付款、可结汇额度、凭证状态、历史汇率。MVP 阶段不依赖任何外部数据（如 ERP、广告后台、税务日历）。</p>
+    </div>
+    <div class="strategy-card">
+      <div class="s-num">策略 03</div>
+      <h4>三不原则：可审计的边界</h4>
+      <p>不预测汇率、不承诺收益、不自动执行。金额拆分、路径成本、额度校验由可审计的规则引擎完成；LLM 只负责解释和交互。</p>
+    </div>
+  </div>
+
+  <h3 id="h-5-2">5.2 产品定位</h3>
+  <div class="callout">
+    <p><strong>AI 是辅助决策层，不是汇率预测工具，也不是金融产品销售。</strong>所有预测能力被刻意阉割，所有执行权保留给用户。这条主线决定了下文每一个设计点的边界。</p>
+  </div>
+</section>
+
+<!-- 章 6：核心产品链路 -->
+<section id="ch6">
+  <span class="section-num">06 / WORKFLOW</span>
+  <h2 class="section-title">核心产品链路</h2>
+
+  <p>从用户输入金额到执行完成，AI 资金建议承接<strong>四步主链 + 一条可选追问支线</strong>：主链是"看到推断 → 看到方案 → 执行 → 反馈"，追问是用户对建议有疑问时随时可触发的支线，调整后回到方案节点重新执行。</p>
+
+  <div class="workflow-wrap">
+    <div class="workflow-canvas" aria-label="AI 资金建议核心产品链路">
+      <svg class="flow-path" viewBox="0 0 1320 258" preserveAspectRatio="none" aria-hidden="true">
+        <defs>
+          <marker id="flowArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+            <path d="M0 0 L10 5 L0 10 Z"></path>
+          </marker>
+          <marker id="flowDashArrow" class="dash-marker" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+            <path d="M0 0 L10 5 L0 10 Z"></path>
+          </marker>
+        </defs>
+        <path d="M172 132 H226" marker-end="url(#flowArrow)"></path>
+        <path d="M420 132 C480 92 498 82 548 78" marker-end="url(#flowArrow)"></path>
+        <path d="M750 78 C810 52 858 48 914 48" marker-end="url(#flowArrow)"></path>
+        <path d="M1116 48 H1168" marker-end="url(#flowArrow)"></path>
+        <path class="dash-path" d="M420 150 C520 178 632 178 732 174" marker-end="url(#flowDashArrow)"></path>
+        <path class="dash-path" d="M750 108 C802 120 842 138 912 171" marker-end="url(#flowDashArrow)"></path>
+        <path class="dash-path" d="M912 170 C838 156 810 136 750 116" marker-end="url(#flowDashArrow)"></path>
+      </svg>
+
+      <div class="flow-node" style="left:0;top:96px;">
+        <div>用户输入兑换金额<br><span class="flow-sub">50,000 USD → CNH</span></div>
+      </div>
+      <div class="flow-node large" style="left:226px;top:96px;">
+        <div>AI 折叠卡浮现<br><span class="flow-sub">预计用途 + 关键依据</span></div>
+      </div>
+      <div class="flow-node large" style="left:548px;top:40px;">
+        <div>展开建议方案<br><span class="flow-sub">当前路径 vs 建议路径</span></div>
+      </div>
+      <div class="flow-node large" style="left:914px;top:8px;">
+        <div>Deep link 执行<br><span class="flow-sub">参数预填 + 二次确认</span></div>
+      </div>
+      <div class="flow-node feedback" style="left:1168px;top:8px;">
+        <div>即时路径对比<br><span class="flow-sub">反馈采集</span></div>
+      </div>
+      <div class="flow-node branch" style="left:916px;top:156px;">
+        <div>追问对话<br><span class="flow-sub">解释依据 / 修改用途</span></div>
+      </div>
+      <span class="flow-label" style="left:774px;top:106px;">可选</span>
+      <span class="flow-label" style="left:508px;top:150px;">可选</span>
+      <span class="flow-label" style="left:802px;top:154px;">调整建议</span>
+    </div>
+  </div>
+
+  <h3>主链 · 第 1 步 · AI 折叠卡浮现</h3>
+  <p>用户在兑换页输入金额并失焦后，卡片以折叠态浮现：仅显示一行"预计用途 + 推断依据"，不打断兑换主流程。用户可直接关闭。</p>
+
+  <h3>主链 · 第 2 步 · 展开建议方案</h3>
+  <p>用户点击「查看建议方案」后展开三步建议（兑换金额、保留金额、辅助动作如汇率提醒）。同时显示"当前路径 vs 建议路径"的成本对比，措辞统一为"减少路径成本"，不使用"节省"。</p>
+
+  <h3>主链 · 第 3 步 · Deep link 执行</h3>
+  <p>每个建议项都对应一个 deep link 按钮，点击后跳转到目标功能页（货币兑换 / 汇率提醒 / 安心兑 / 店铺管理-额度），参数预填，但用户必须二次确认才会真正提交。</p>
+
+  <h3>主链 · 第 4 步 · 即时路径对比 + 反馈采集</h3>
+  <p>执行后即时显示"按当前费率估算可减少路径成本约 ¥XXX"。基于决策当时的可选路径对比，不依赖未来汇率走势的事后回算。同时采集即时反馈（👍 / 👎 / 关闭原因）作为后续策略优化输入。</p>
+
+  <h3>支线 · 追问对话（可选）</h3>
+  <p>用户在第 1 步看到推断或第 2 步看到方案后，若对依据或建议有疑问，可点击「追问 AI」打开右侧对话抽屉。AI 已在上下文中获知当前推荐内容，用户可点击预设问题或自由提问；可基于用户新信息（如"广告投放计划取消"）<strong>即时调整建议</strong>，回到第 2 步重新展示新的方案。</p>
+</section>
+
+<!-- 章 7：产品能力说明 -->
+<section id="ch7">
+  <span class="section-num">07 / CAPABILITY</span>
+  <h2 class="section-title">产品能力说明</h2>
+
+  <p>支撑核心产品链路的五层能力。<strong>所有数字相关计算由后端规则引擎完成，LLM 只承担文案组装和对话交互。</strong></p>
+
+  <div class="capability-grid">
+    <div class="capability-card">
+      <div class="cap-num">能力 01 · 触发引擎</div>
+      <h4>判断什么时候浮现卡片</h4>
+      <p>金额阈值校验、用户分群、频次控制、关闭历史记忆。决定不同用户在同一动作下是否看到卡片。</p>
+    </div>
+
+    <div class="capability-card">
+      <div class="cap-num">能力 02 · 推荐策略引擎</div>
+      <h4>识别用途、计算金额、生成方案</h4>
+      <p>聚合余额 / 历史付款 / 可结汇额度 / 凭证状态等内部数据，识别四类用途场景，输出"该换多少 / 该留多少 / 是否触达额度风险"。<strong>所有数字由规则计算，无 LLM 介入。</strong></p>
+    </div>
+
+    <div class="capability-card">
+      <div class="cap-num">能力 03 · LLM 组装层</div>
+      <h4>把规则结果翻译成自然语言</h4>
+      <p>按场景模板填空生成可解释文案；追问对话支持 Function Calling 调内部 API 改建议；System prompt 注入三不原则与措辞红线。</p>
+    </div>
+
+    <div class="capability-card">
+      <div class="cap-num">能力 04 · Deep link 执行层</div>
+      <h4>把建议转成可执行动作</h4>
+      <p>每个建议项对应一个 deep link，跳转目标功能页时预填参数；用户二次确认后才真正提交；执行后回写实际操作金额，作为后续优化依据。</p>
+    </div>
+
+    <div class="capability-card">
+      <div class="cap-num">能力 05 · 反馈与追踪层</div>
+      <h4>关闭决策闭环</h4>
+      <p>即时反馈（👍 / 👎 / 关闭原因）+ 执行后路径成本展示 + 月度财务师抽审 100 笔。错误推荐率超过 3% 暂停灰度。</p>
+    </div>
+  </div>
+</section>
+
+<!-- 章 8：关键设计点 -->
+<section id="ch8">
+  <span class="section-num">08 / KEY DESIGN</span>
+  <h2 class="section-title">关键设计点</h2>
+
+  <p>D1–D4 按四类用途场景分别设计 AI 介入方式；D5–D6 是贯穿所有场景的纪律。<strong>介入的强弱由"用户决策的不确定性"和"潜在风险"决定，不由模型置信度决定。</strong></p>
+
+  <div class="design-grid">
+    <div class="design-card silent">
+      <span class="design-tag">D1 · 付供应商</span>
+      <h4>静默校验 · 不打断</h4>
+      <p>识别条件：历史付款偏向人民币、收款人为国内供应商、本次金额在历史区间内、额度与凭证均正常。</p>
+      <p>AI 介入：仅在「确认兑换」按钮上方显示一行"已校验：额度充足、凭证完整"绿色提示。不弹大卡，不打断流程。</p>
+      <div class="design-why"><strong>为什么不弹卡：</strong>用户目标已明确，AI 再问「你要干嘛」是负价值。仅在异常情况（如金额显著超过历史均值、额度即将不足）才升级为弹卡。</div>
+    </div>
+
+    <div class="design-card">
+      <span class="design-tag">D2 · 保留外币付款</span>
+      <h4>主动建议 · 浮现完整方案</h4>
+      <p>识别条件：账上有外币余额、近 30 天有同币种付款记录（广告、SaaS、海外仓）、本次为大额结汇。</p>
+      <p>AI 介入：浮现完整 AI 卡，推断用途为"保留外币付款"，附依据（"近 30 天 X 笔同币种付款，共 $XX,XXX"），给出"兑换部分 + 保留部分 + 设汇率提醒"三步方案 + 路径成本对比。</p>
+      <div class="design-why"><strong>为什么主动建议：</strong>这是用户最容易"全换了又换回来"产生二次换汇成本的场景。AI 的关联价值在此最大。</div>
+    </div>
+
+    <div class="design-card warn">
+      <span class="design-tag">D3 · 暂时不用</span>
+      <h4>克制建议 · 不交叉销售</h4>
+      <p>识别条件：用户主动选择"暂时不用"，或历史无明确未来付款承诺。</p>
+      <p>AI 介入：仅推荐"分批兑换 + 汇率提醒 + 暂不兑换"三个低风险动作。<strong>金融产品（万余盈、安心兑）入口仅在用户已有持币 30 天以上 / 已使用过该产品 / 主动选择"暂时不用"等触发条件下才显示。</strong></p>
+      <div class="design-why"><strong>为什么克制：</strong>避免"用户不知道做什么"被动转化为"系统推销金融产品"。匹配条件不满足时不展示金融产品入口。</div>
+    </div>
+
+    <div class="design-card danger">
+      <span class="design-tag">D4 · 额度不足</span>
+      <h4>异常拦截 · 引导补凭证</h4>
+      <p>识别条件：本次结汇金额超过本月可用额度，或检测到店铺有未补凭证的订单。</p>
+      <p>AI 介入：浮现警示色卡片，明确告知"本次最多可结汇 X 美元"和"X 笔订单缺凭证"，主按钮直接跳转到「店铺管理-额度管理」预填到那几笔订单。</p>
+      <div class="design-why"><strong>为什么必弹：</strong>境内合作伙伴展业三原则要求人民币结汇必须有真实贸易凭证。这是合规硬约束，让用户撞上去再补，不如提前拦下来。</div>
+    </div>
+  </div>
+
+  <h3 id="h-8-d5">D5 · 数据边界（贯穿全场景）</h3>
+  <p>MVP 阶段，所有策略输入仅来自 WorldFirst 内部高确定性数据：余额、历史付款、收款人类型、可结汇额度、凭证状态、当前与历史汇率。未来付款需求通过历史模式和已创建付款草稿推断。<strong>不接入任何外部数据源（ERP、广告后台、VAT 日历），避免假设过多导致不可控。</strong></p>
+
+  <h3 id="h-8-d6">D6 · 措辞红线（贯穿全场景）</h3>
+  <table class="metric-table">
+    <thead><tr><th>不能用</th><th>改成</th></tr></thead>
+    <tbody>
+      <tr><td>多赚 ¥X / 节省 ¥X</td><td class="metric-target">减少路径成本约 ¥X</td></tr>
+      <tr><td>美元将上涨 / 下跌</td><td class="metric-target">当前处于近 30 天 XX 区间（参考）</td></tr>
+      <tr><td>推荐你立即买入</td><td class="metric-target">你可以考虑设置汇率提醒</td></tr>
+      <tr><td>本操作可获得收益</td><td class="metric-target">本操作可降低成本</td></tr>
+    </tbody>
+  </table>
+  <p>所有金额数字由后端规则引擎生成，LLM 在 prompt 层面被明确禁止预测、计算、承诺收益。措辞规则在 system prompt 里以红线形式注入。</p>
+</section>
+
+<!-- 章 9：用户 case -->
+<section id="ch9">
+  <span class="section-num">09 / USER CASE</span>
+  <h2 class="section-title">用户 case · 一次保留外币的决策</h2>
+
+  <div class="case">
+    <div class="case-header">
+      <span class="case-tag">CASE WALKTHROUGH</span>
+      <span class="case-title">小王的周一上午</span>
+    </div>
+
+    <div class="case-narrative">
+      小王是一名多平台跨境电商卖家，月 GMV 约 50 万美元。周一上午，他在 WorldFirst 收到一笔 <strong>5 万美元的 TikTok Shop 平台回款</strong>，原本准备全部兑换成人民币，用于国内备货和日常周转。<br><br>
+      当他进入「货币兑换」页并输入 <strong>50,000 USD</strong> 时，系统识别到：过去 30 天内他有稳定的 USD 广告和 SaaS 付款记录；同时本次的人民币付款需求并不需要全额覆盖。<br><br>
+      于是页面在「确认兑换」按钮上方浮现一张<strong>「AI 资金建议」卡</strong>，建议他只兑换其中一部分，保留部分美元用于后续外币付款，<strong>减少不必要的二次换汇路径成本</strong>。
+    </div>
+
+    <div class="case-flow">
+      <div class="case-flow-step">
+        <span class="csn">STEP 1 浮现</span>
+        <strong>看到推断</strong>
+        <span>卡片显示「预计用途：保留外币付款」「依据：近 30 天 5 笔 USD 付款，共 $32,100」</span>
+      </div>
+      <div class="case-flow-step">
+        <span class="csn">STEP 2 展开</span>
+        <strong>看到方案</strong>
+        <span>三步建议——兑换 20,000 USD、保留 30,000 USD、设置 USD/CNH 汇率提醒；并展示当前路径 vs 建议路径成本对比</span>
+      </div>
+      <div class="case-flow-step">
+        <span class="csn">STEP 3 追问</span>
+        <strong>问清楚</strong>
+        <span>小王不确定为什么是 30,000，点击「追问 AI」，系统答："这是按你过去 30 天 USD 付款总额推算的下月需求估算"</span>
+      </div>
+      <div class="case-flow-step">
+        <span class="csn">STEP 4 执行</span>
+        <strong>一键应用</strong>
+        <span>点击「一键应用建议」，金额自动改为 20,000 USD，并预填了汇率提醒。小王二次确认后提交</span>
+      </div>
+      <div class="case-flow-step">
+        <span class="csn">STEP 5 反馈</span>
+        <strong>看到结果</strong>
+        <span>底部出现绿色 banner："已应用建议方案 · 减少一次未来二次换汇链路，按当前费率估算可减少路径成本约 ¥XXX"</span>
+      </div>
+    </div>
+  </div>
+
+  <h3>这个 case 验证了三件事</h3>
+  <ul>
+    <li><strong>策略 01 兑现</strong>：AI 主动识别"保留外币付款"用途，从历史付款记录中关联出依据，而不是问"你要换汇做什么"</li>
+    <li><strong>策略 02 兑现</strong>：所有数字（5 笔付款、$32,100、30,000）全部来自 WorldFirst 内部数据，没有任何预测</li>
+    <li><strong>策略 03 兑现</strong>：AI 给出建议，但金额拆分由规则引擎完成；执行权由用户二次确认；措辞使用"减少路径成本"，不说节省</li>
+  </ul>
+</section>
+
+<!-- 章 10：风险评估 -->
+<section id="ch10">
+  <span class="section-num">10 / RISK</span>
+  <h2 class="section-title">风险评估</h2>
+
+  <p>以下是已识别的 5 类风险与对应缓解措施。<strong>合规与数据是最高优先级风险，模型与工程次之，冷启动最低。</strong></p>
+
+  <div class="risk-list">
+    <div class="risk-item">
+      <span class="risk-level high">高 · 合规</span>
+      <div class="risk-desc"><strong>措辞误踩监管红线</strong><br>LLM 偶发输出"将上涨""推荐买入"等违禁措辞</div>
+      <div class="risk-mitigation"><strong>缓解</strong>：System prompt 注入红线 + 输出后正则扫描 + 财务师月抽审 100 笔</div>
+    </div>
+    <div class="risk-item">
+      <span class="risk-level high">高 · 数据</span>
+      <div class="risk-desc"><strong>商家历史数据不完整</strong><br>新商家或低频用户无足够付款记录可推断</div>
+      <div class="risk-mitigation"><strong>缓解</strong>：数据置信度低于阈值时不浮现卡片，仅做静默校验</div>
+    </div>
+    <div class="risk-item">
+      <span class="risk-level mid">中 · 模型</span>
+      <div class="risk-desc"><strong>LLM 偶发跑偏或过度迎合</strong><br>追问对话中可能虚构数据或被用户引导突破红线</div>
+      <div class="risk-mitigation"><strong>缓解</strong>：金额、汇率全部由规则引擎注入，LLM 不参与计算；红线提示重复出现在 system prompt</div>
+    </div>
+    <div class="risk-item">
+      <span class="risk-level mid">中 · 工程</span>
+      <div class="risk-desc"><strong>第三方 LLM API 网络波动</strong><br>面试、演示、生产环境均可能出现 API 不可用</div>
+      <div class="risk-mitigation"><strong>缓解</strong>：对预设高频问题准备本地 fallback 回答；触发 fallback 时在 UI 标注</div>
+    </div>
+    <div class="risk-item">
+      <span class="risk-level low">低 · 冷启</span>
+      <div class="risk-desc"><strong>新用户无任何历史信息</strong><br>无法识别用途、无法做关联</div>
+      <div class="risk-mitigation"><strong>缓解</strong>：冷启商家仅触发静默校验和额度拦截，不做主动建议</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>WorldFirst AI 资金建议 · 方案文档 v3.0</p>
+  <p>2026-06-24 · 林佩萱</p>
+</footer>
+
+<script>
+(function(){
+  const links = Array.from(document.querySelectorAll('.outline a'));
+  const targets = links.map(a => {
+    const id = a.getAttribute('href').slice(1);
+    const el = document.getElementById(id);
+    return { link: a, el };
+  }).filter(t => t.el);
+
+  function onScroll(){
+    const offset = 120; // 顶部留出 sticky topbar 空间
+    let activeIdx = 0;
+    for (let i = 0; i < targets.length; i++){
+      const top = targets[i].el.getBoundingClientRect().top;
+      if (top - offset <= 0) activeIdx = i;
+      else break;
+    }
+    links.forEach(l => l.classList.remove('active'));
+    if (targets[activeIdx]) targets[activeIdx].link.classList.add('active');
+    // 自动滚动大纲让 active 项可见
+    const active = document.querySelector('.outline a.active');
+    if (active){
+      const ol = document.getElementById('outline');
+      const ar = active.getBoundingClientRect();
+      const olr = ol.getBoundingClientRect();
+      if (ar.top < olr.top || ar.bottom > olr.bottom){
+        active.scrollIntoView({block:'nearest'});
+      }
+    }
+  }
+
+  // 平滑滚动
+  links.forEach(l => {
+    l.addEventListener('click', e => {
+      e.preventDefault();
+      const id = l.getAttribute('href').slice(1);
+      const el = document.getElementById(id);
+      if (el){
+        const top = el.getBoundingClientRect().top + window.scrollY - 80;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    });
+  });
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
+</script>
+
+</body>
+</html>

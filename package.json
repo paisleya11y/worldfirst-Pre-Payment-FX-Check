@@ -1,0 +1,9 @@
+{
+  "name": "worldfirst-ai-demo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "WorldFirst AI 资金建议 Demo",
+  "scripts": {
+    "dev": "node server.js"
+  }
+}
