@@ -78,19 +78,19 @@ em{color:#FF0051;font-style:normal;font-weight:600;}
 .compare-card .compare-time{font-size:12px;color:#64748b;margin-top:10px;border-top:1px solid rgba(0,0,0,0.06);padding-top:8px;}
 
 /* workflow 流程图（参考 Mermaid：主链 + 追问支线） */
-.workflow-wrap{margin:32px 0 8px;background:#fff;border:1px solid #edf0f5;border-radius:12px;padding:24px;overflow-x:auto;}
-.workflow-canvas{position:relative;min-width:1320px;height:258px;background:#fff;}
-.flow-node{position:absolute;width:172px;min-height:66px;background:#fff;border:1px solid #e2e5ea;border-radius:2px;display:flex;align-items:center;justify-content:center;text-align:center;padding:10px 12px;color:#111827;line-height:1.35;font-size:14px;font-weight:500;}
-.flow-node.large{width:202px;min-height:76px;}
-.flow-node.branch{width:190px;min-height:72px;}
-.flow-node.feedback{width:150px;}
+.workflow-wrap{margin:32px 0 8px;background:#fff;border:1px solid #edf0f5;border-radius:12px;padding:24px 8px;overflow:hidden;}
+.workflow-canvas{position:relative;min-width:1000px;height:258px;background:#fff;}
+.flow-node{position:absolute;width:150px;min-height:66px;background:#fff;border:1px solid #e2e5ea;border-radius:2px;display:flex;align-items:center;justify-content:center;text-align:center;padding:10px 12px;color:#111827;line-height:1.35;font-size:14px;font-weight:500;}
+.flow-node.large{width:170px;min-height:76px;}
+.flow-node.branch{width:170px;min-height:72px;}
+.flow-node.feedback{width:130px;}
 .flow-sub{display:block;font-size:12px;color:#475569;font-weight:400;margin-top:2px;}
 .flow-line{position:absolute;height:1.5px;background:#4b5563;transform-origin:left center;}
 .flow-line::after{content:"";position:absolute;right:-1px;top:50%;transform:translateY(-50%);border-left:8px solid #4b5563;border-top:5px solid transparent;border-bottom:5px solid transparent;}
 .flow-dash{position:absolute;border-top:1.5px dashed #6b7280;height:0;transform-origin:left center;}
 .flow-dash::after{content:"";position:absolute;right:-1px;top:-5px;border-left:7px solid #6b7280;border-top:5px solid transparent;border-bottom:5px solid transparent;}
 .flow-label{position:absolute;font-size:12px;color:#1f2937;background:#fff;padding:0 6px;line-height:1;}
-.flow-path{position:absolute;left:0;top:0;width:1320px;height:258px;pointer-events:none;}
+.flow-path{position:absolute;left:0;top:0;width:1000px;height:258px;pointer-events:none;}
 .flow-path path{fill:none;stroke:#4b5563;stroke-width:1.5;}
 .flow-path .dash-path{stroke:#6b7280;stroke-dasharray:3.5 4;}
 .flow-path marker path{fill:#4b5563;}
@@ -848,7 +848,7 @@ footer p{margin:4px 0;color:#94a3b8;}
 
   <div class="workflow-wrap">
     <div class="workflow-canvas" aria-label="AI 资金建议核心产品链路">
-      <svg class="flow-path" viewBox="0 0 1320 258" preserveAspectRatio="none" aria-hidden="true">
+      <svg class="flow-path" viewBox="0 0 1000 258" preserveAspectRatio="none" aria-hidden="true">
         <defs>
           <marker id="flowArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
             <path d="M0 0 L10 5 L0 10 Z"></path>
@@ -857,36 +857,36 @@ footer p{margin:4px 0;color:#94a3b8;}
             <path d="M0 0 L10 5 L0 10 Z"></path>
           </marker>
         </defs>
-        <path d="M172 132 H226" marker-end="url(#flowArrow)"></path>
-        <path d="M420 132 C480 92 498 82 548 78" marker-end="url(#flowArrow)"></path>
-        <path d="M750 78 C810 52 858 48 914 48" marker-end="url(#flowArrow)"></path>
-        <path d="M1116 48 H1168" marker-end="url(#flowArrow)"></path>
-        <path class="dash-path" d="M420 150 C520 178 632 178 732 174" marker-end="url(#flowDashArrow)"></path>
-        <path class="dash-path" d="M750 108 C802 120 842 138 912 171" marker-end="url(#flowDashArrow)"></path>
-        <path class="dash-path" d="M912 170 C838 156 810 136 750 116" marker-end="url(#flowDashArrow)"></path>
+        <path d="M150 132 H180" marker-end="url(#flowArrow)"></path>
+        <path d="M350 132 C388 98 405 84 430 78" marker-end="url(#flowArrow)"></path>
+        <path d="M600 78 C640 52 654 48 675 48" marker-end="url(#flowArrow)"></path>
+        <path d="M845 48 H870" marker-end="url(#flowArrow)"></path>
+        <path class="dash-path" d="M350 150 C445 178 555 178 675 174" marker-end="url(#flowDashArrow)"></path>
+        <path class="dash-path" d="M600 108 C640 120 665 138 715 156" marker-end="url(#flowDashArrow)"></path>
+        <path class="dash-path" d="M713 170 C665 156 640 136 600 116" marker-end="url(#flowDashArrow)"></path>
       </svg>
 
       <div class="flow-node" style="left:0;top:96px;">
         <div>用户输入兑换金额<br><span class="flow-sub">50,000 USD → CNH</span></div>
       </div>
-      <div class="flow-node large" style="left:226px;top:96px;">
+      <div class="flow-node large" style="left:180px;top:96px;">
         <div>AI 折叠卡浮现<br><span class="flow-sub">预计用途 + 关键依据</span></div>
       </div>
-      <div class="flow-node large" style="left:548px;top:40px;">
+      <div class="flow-node large" style="left:430px;top:40px;">
         <div>展开建议方案<br><span class="flow-sub">当前路径 vs 建议路径</span></div>
       </div>
-      <div class="flow-node large" style="left:914px;top:8px;">
+      <div class="flow-node large" style="left:675px;top:8px;">
         <div>Deep link 执行<br><span class="flow-sub">参数预填 + 二次确认</span></div>
       </div>
-      <div class="flow-node feedback" style="left:1168px;top:8px;">
+      <div class="flow-node feedback" style="left:870px;top:8px;">
         <div>即时路径对比<br><span class="flow-sub">反馈采集</span></div>
       </div>
-      <div class="flow-node branch" style="left:916px;top:156px;">
+      <div class="flow-node branch" style="left:675px;top:156px;">
         <div>追问对话<br><span class="flow-sub">解释依据 / 修改用途</span></div>
       </div>
-      <span class="flow-label" style="left:774px;top:106px;">可选</span>
-      <span class="flow-label" style="left:508px;top:150px;">可选</span>
-      <span class="flow-label" style="left:802px;top:154px;">调整建议</span>
+      <span class="flow-label" style="left:612px;top:106px;">可选</span>
+      <span class="flow-label" style="left:376px;top:150px;">可选</span>
+      <span class="flow-label" style="left:592px;top:154px;">调整建议</span>
     </div>
   </div>
 

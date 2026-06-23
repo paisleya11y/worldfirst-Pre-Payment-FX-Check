@@ -4,6 +4,6 @@
   "private": true,
   "description": "WorldFirst AI 资金建议 Demo",
   "scripts": {
-    "dev": "node server.js"
+    "dev": "node local/server.js"
   }
 }
